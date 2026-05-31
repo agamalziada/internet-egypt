@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>WE (Telecom Egypt) Profit Growth: 2024 vs. 2025</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  :root{--blue:#378ADD;--coral:#D85A30;--teal:#1D9E75;--amber:#BA7517;--gray:#888780;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#fff;color:#2c2c2a;}
+  #root{padding:16px 20px 14px;}
+  .hdr{border-left:3px solid #D85A30;padding-left:11px;margin-bottom:10px;}
+  .tag{font-size:10px;font-weight:700;letter-spacing:.07em;color:var(--gray);margin-bottom:2px;text-transform:uppercase;}
+  .title{font-size:15px;font-weight:600;line-height:1.35;margin-bottom:2px;}
+  .subtitle{font-size:12px;color:#5f5e5a;}
+  .callout{background:#f1efe8;border-left:3px solid #D85A30;padding:8px 11px;font-size:12px;color:#5f5e5a;line-height:1.55;margin:9px 0;font-style:italic;}
+  .chart-wrap{position:relative;width:100%;height:190px;}
+  .source{font-size:10px;color:var(--gray);margin-top:10px;line-height:1.4;}
+  @media(prefers-color-scheme:dark){body{background:#1a1a18;color:#d3d1c7;}.callout{background:#2c2c2a;color:#b4b2a9;}.subtitle,.source{color:#b4b2a9;}}
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="hdr">
+    <p class="tag">Zawia3 &middot; Chart 5 of 5</p>
+    <p class="title">WE (Telecom Egypt) Profit Growth: 2024 vs. 2025</p>
+    <p class="subtitle">Net profit in EGP billion — a 123% jump in a single year</p>
+  </div>
+  <div class="callout">"In one year, WE's net profit surged 123% — while users continue to report slow speeds and mounting costs."</div>
+  
+<div style="display:flex;gap:10px;margin-bottom:12px">
+  <div style="flex:1;background:#e1f5ee;border-radius:8px;padding:11px 13px">
+    <div style="font-size:11px;font-weight:600;color:#0F6E56;margin-bottom:3px">2024</div>
+    <div id="v1" style="font-size:26px;font-weight:800;color:#0F6E56;line-height:1">0</div>
+    <div style="font-size:10px;color:#0F6E56;opacity:.8;margin-top:2px">EGP billion (+22%)</div>
+  </div>
+  <div style="flex:1;background:#faece7;border-radius:8px;padding:11px 13px">
+    <div style="font-size:11px;font-weight:600;color:#993C1D;margin-bottom:3px">2025</div>
+    <div id="v2" style="font-size:26px;font-weight:800;color:#993C1D;line-height:1">0</div>
+    <div style="font-size:10px;color:#993C1D;opacity:.8;margin-top:2px">EGP billion (+123%)</div>
+  </div>
+</div>
+<div style="text-align:center;padding:8px;border-radius:7px;font-size:13px;font-weight:700;color:#D85A30;background:#faece7;margin-bottom:11px">
+  &#8593; +123% growth in one year — while user complaints keep rising
+</div>
+<div class="chart-wrap" style="height:170px"><canvas id="c"></canvas></div>
+<script>
+(function(){
+  var dk=matchMedia("(prefers-color-scheme:dark)").matches;
+  var tc=dk?"#b4b2a9":"#5f5e5a",gc=dk?"rgba(255,255,255,.08)":"rgba(0,0,0,.07)";
+  var teal=dk?"#5DCAA5":"#1D9E75",coral=dk?"#F0997B":"#D85A30";
+  var s=null;
+  function cu(ts){
+    if(!s)s=ts;
+    var p=Math.min((ts-s)/800,1),e=1-Math.pow(1-p,3);
+    document.getElementById("v1").textContent=(e*14.3).toFixed(1);
+    document.getElementById("v2").textContent=(e*22.6).toFixed(1);
+    if(p<1)requestAnimationFrame(cu);
+  }
+  setTimeout(function(){requestAnimationFrame(cu);},100);
+  new Chart(document.getElementById("c"),{
+    type:"bar",
+    data:{
+      labels:["2024","2025"],
+      datasets:[{data:[14.3,22.6],backgroundColor:[teal,coral],borderWidth:0,borderRadius:5}]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      animation:{duration:900,easing:"easeOutQuart"},
+      plugins:{
+        legend:{display:false},
+        tooltip:{
+          backgroundColor:dk?"#2c2c2a":"#fff",
+          borderColor:dk?"rgba(255,255,255,.1)":"rgba(0,0,0,.08)",
+          borderWidth:1,titleColor:dk?"#d3d1c7":"#2c2c2a",bodyColor:tc,padding:10,
+          callbacks:{label:function(c){return "EGP "+c.raw+"B";}}
+        }
+      },
+      scales:{
+        x:{ticks:{color:tc,font:{size:13,weight:"700"}},grid:{display:false},border:{color:gc}},
+        y:{min:10,max:26,ticks:{color:tc,font:{size:11},callback:function(v){return v+"B";}},grid:{color:gc},border:{display:false}}
+      }
+    }
+  });
+})();
+</script>
+  <p class="source">Source: WE (Telecom Egypt) financial reports</p>
+</div>
+<script>
+setTimeout(function(){
+  var h=document.getElementById("root").offsetHeight;
+  window.parent.postMessage({type:"chartResize",height:h},"*");
+},1400);
+</script>
+</body></html>
