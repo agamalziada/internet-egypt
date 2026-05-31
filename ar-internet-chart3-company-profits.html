@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>أرباح وإيرادات شركات الاتصالات الأربع في مصر (2024–2025)</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--blue:#378ADD;--coral:#D85A30;--teal:#1D9E75;--amber:#BA7517;--gray:#888780;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:"Tajawal",sans-serif;background:#fff;color:#2c2c2a;direction:rtl;}
+  #root{padding:16px 20px 14px;}
+  .hdr{border-right:3px solid #378ADD;padding-right:11px;margin-bottom:10px;}
+  .tag{font-size:10px;font-weight:700;letter-spacing:.07em;color:var(--gray);margin-bottom:2px;}
+  .title{font-size:15px;font-weight:700;line-height:1.4;margin-bottom:2px;}
+  .subtitle{font-size:12px;color:#5f5e5a;}
+  .callout{background:#f1efe8;border-right:3px solid #378ADD;padding:8px 11px;font-size:12px;color:#5f5e5a;line-height:1.6;margin:9px 0;font-style:italic;}
+  .chart-wrap{position:relative;width:100%;height:190px;}
+  .source{font-size:10px;color:var(--gray);margin-top:10px;line-height:1.4;text-align:right;}
+  @media(prefers-color-scheme:dark){body{background:#1a1a18;color:#d3d1c7;}.callout{background:#2c2c2a;color:#b4b2a9;}.subtitle,.source{color:#b4b2a9;}}
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="hdr">
+    <p class="tag">زاوية ثالثة · إنفوجرافيك ③ من ⑤</p>
+    <p class="title">أرباح وإيرادات شركات الاتصالات الأربع في مصر (2024–2025)</p>
+    <p class="subtitle">مليار جنيه — الأرباح تتضاعف بينما الشكاوى تتصاعد</p>
+  </div>
+  <div class="callout">"صافي ربح المصرية للاتصالات +123% وفودافون +97% — الأرباح تتضاعف بينما يشكو المستخدمون من البطء وارتفاع الأسعار"</div>
+  
+<div style="background:#f1efe8;border-radius:7px;padding:9px 12px;margin-bottom:10px;font-size:11px;color:#5f5e5a">
+  ملاحظة: المصرية للاتصالات &amp; إي آند = صافي ربح · فودافون = ربح تشغيلي · أورنج = إيرادات
+</div>
+<div class="chart-wrap" style="height:210px"><canvas id="c"></canvas></div>
+<script>
+(function(){
+  var dk=matchMedia("(prefers-color-scheme:dark)").matches;
+  var tc=dk?"#b4b2a9":"#5f5e5a",gc=dk?"rgba(255,255,255,.08)":"rgba(0,0,0,.07)";
+  var blue=dk?"#85B7EB":"#378ADD",coral=dk?"#F0997B":"#D85A30",
+      teal=dk?"#5DCAA5":"#1D9E75",amber=dk?"#FAC775":"#BA7517";
+  new Chart(document.getElementById("c"),{
+    type:"bar",
+    data:{
+      labels:[
+        ["فودافون مصر","(ربح تشغيلي 2025)"],
+        ["أورنج مصر","(إيرادات 2024)"],
+        ["المصرية للاتصالات","(صافي ربح 2025)"],
+        ["إي آند مصر","(ربح 9 أشهر 2025)"]
+      ],
+      datasets:[{data:[27.6,36,22.6,15.24],backgroundColor:[blue,teal,coral,amber],borderWidth:0,borderRadius:4}]
+    },
+    options:{
+      indexAxis:"y",
+      responsive:true,maintainAspectRatio:false,
+      animation:{duration:900,easing:"easeOutQuart",delay:function(c){return c.dataIndex*80;}},
+      plugins:{
+        legend:{display:false},
+        tooltip:{
+          backgroundColor:dk?"#2c2c2a":"#fff",
+          borderColor:dk?"rgba(255,255,255,.1)":"rgba(0,0,0,.08)",
+          borderWidth:1,
+          titleColor:dk?"#d3d1c7":"#2c2c2a",
+          bodyColor:tc,padding:10,
+          titleFont:{family:"Tajawal"},bodyFont:{family:"Tajawal"},
+          callbacks:{label:function(c){return c.raw+" مليار جنيه";}}
+        }
+      },
+      scales:{
+        x:{ticks:{color:tc,font:{size:10,family:"Tajawal"},callback:function(v){return v+"م.ج";}},grid:{color:gc},border:{display:false}},
+        y:{position:"right",ticks:{color:tc,font:{size:10,family:"Tajawal"}},grid:{display:false},border:{display:false}}
+      }
+    }
+  });
+})();
+</script>
+  <p class="source">المصدر: تقارير مالية للشركات / أشرق بيزنس / المال نيوز</p>
+</div>
+<script>
+setTimeout(function(){
+  var h=document.getElementById("root").offsetHeight;
+  window.parent.postMessage({type:"chartResize",height:h},"*");
+},1400);
+</script>
+</body></html>
